@@ -3,4 +3,8 @@
   service:
    name: haproxy
    state: restarted 
+- name: start_haproxy
+  service:
+   name: haproxy
+   state: started
 

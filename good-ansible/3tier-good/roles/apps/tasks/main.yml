@@ -1,4 +1,4 @@
-- name: install tomcat
+- name: Installing  tomcat on App Servers 
   package:
    name: tomcat
    state: latest
@@ -7,30 +7,26 @@
    name: tomcat
    enabled: yes
 
-- name: create ansible tomcat directory
+- name: Create ansible tomcat directory on App Servers
   file:
    path: /usr/share/tomcat/webapps/ansible
    state: directory
 
-- name: copy static index.html to tomcat webapps/ansible/index.html
+- name: Copy static index.html to tomcat webapps/ansible/index.html on App Servers
   template:
    src: index.html.j2
    dest: /usr/share/tomcat/webapps/ansible/index.html
    mode: 0644
 
-- name: start tomcat
+- name: Start tomcat on App Servers
   service:
    name: tomcat
-   state: started
+  notify:
+   - tomcat_start
 
-- name: copy static index.html to tomcat webapps/ansible/index.html on app1
+- name: copy static index.html to tomcat webapps/ansible/index.html on App Servers
   template:
-   src: index.html.app1
+   src: index.html.j2
    dest: /usr/share/tomcat/webapps/ansible/index.html
-  when: inventory_hostname == 'app1.7f87.internal'
-
-- name: copy static index.html to tomcat webapps/ansible/index.html on app2
-  template:
-   src: index.html.app2
-   dest: /usr/share/tomcat/webapps/ansible/index.html
-  when: inventory_hostname == 'app2.7f87.internal'
+  with_indexed_items:
+   - "{{ groups['apps'] }}"

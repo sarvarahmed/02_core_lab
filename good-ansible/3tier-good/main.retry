@@ -1,5 +1,5 @@
-app1.7f87.internal
-app2.7f87.internal
-appdb1.7f87.internal
-frontend1.7f87.internal
-support1.7f87.internal
+app1.{{ GUID }}.internal
+app2.{{ GUID }}.internal
+appdb1.{{ GUID }}.internal
+frontend1.{{ GUID }}.internal
+support1.{{ GUID }}.internal

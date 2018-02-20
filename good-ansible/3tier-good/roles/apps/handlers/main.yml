@@ -1,0 +1,4 @@
+- name: tomcat_start
+  service:
+   name: tomcat
+   state: started
